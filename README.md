@@ -3,9 +3,9 @@ Project for Hackable 2021
 
 Principal files: 
 
-kivi.py -> Main code for the project
-my.kv -> kivy structure and style
-backend.py -> python funcitons used in the main code
+- kivi.py -> Main code for the project
+- my.kv -> kivy structure and style
+- backend.py -> python funcitons used in the main code
 
 ## Inspiration
 Our inspiration is to solve the education problem that exist in children from the Middle East.
