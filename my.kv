@@ -1,0 +1,240 @@
+#:import COLOR kivy.utils.get_color_from_hex
+#:set RED "#F94A69"
+#:set GREEN "#06A5AB"
+
+WindowManager:
+    MainWindow:
+    ConceptsWindow:
+    ExplanationWindow:
+    ComparisonWindow:
+
+<WrappedLabel@Label>:
+    size_hint_y: None
+    height: self.texture_size[1] + (self.texture_size[1]/2)
+    markup: True
+    font_name: "Roboto"
+
+<Button1>:
+    font_name: "Roboto"
+    font_size: min(self.height, self.width) / 4
+    bold: True
+    background_normal: "./images/button_normal.png"
+    background_down: "./images/button_down.png"
+    background_color: COLOR("#0066BA")
+    border: (2, 2, 2, 2)
+
+
+<Label>:
+    font_size: 20
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        rows: 5
+        cols: 1
+        padding: 100
+        spacing: 30
+
+        Label:
+            text: "WELCOME TO MATH BOT"
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+
+        Label:
+            text: "Hello, I'm MathBot your math virtual assistant.\nSelect what you want to do."
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+
+        Button1:
+
+            text: "Concepts"
+
+            on_release:
+                app.root.current = "concepts"
+                root.manager.transition.direction = "left"
+
+        Button1:
+
+            text: "Explanation"
+
+            on_release:
+                app.root.current = "explanation"
+                root.manager.transition.direction = "left"
+
+        Button1:
+
+            text: "Comparison"
+
+            on_release:
+                app.root.current = "comparison"
+                root.manager.transition.direction = "left"
+
+<ConceptsWindow>:
+    name: "concepts"
+    message: message
+
+    GridLayout:
+        rows: 5
+        cols: 1
+        padding: 100
+        spacing: 30
+
+        Button1:
+            font_size: 20
+            size_hint: None, None
+            size: 80, 50
+            pos_hint: {'x': 0, 'top': 1}
+            text: "<- Back"
+            on_press:
+                root.manager.transition.direction = 'right'
+                app.root.current = 'main'
+
+        Label:
+            text: "CONCEPTS"
+
+        Label:
+            text: "Here you can ask for the definition of any topic.\nExample: What is a fraction?"
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+
+        TextInput:
+            id: message
+            multiline: False
+
+        Button1:
+            text: "Get definition"
+            on_release:
+                root.cleartext()
+            on_release:
+                root.answer()
+
+<ExplanationWindow>:
+    name: "explanation"
+    fraction: fraction
+
+    GridLayout:
+        rows: 6
+        cols: 1
+        padding: 100
+        spacing: 30
+
+        Button1:
+            font_size: 20
+            size_hint: None, None
+            size: 80, 50
+            pos_hint: {'x': 0, 'top': 1}
+            text: "<- Back"
+            on_press:
+                root.manager.transition.direction = 'right'
+                app.root.current = 'main'
+            on_release:
+                root.cleartext()
+
+        Label:
+            text: "EXPLANATION"
+
+        Label:
+            text: "Here you can get an explanation of given a fraction.\nExample: 1/4"
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Fraction: "
+                color: 0,0,0,1
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+
+            TextInput:
+                id: fraction
+                multiline: False
+
+
+        Button1:
+            text: "Get fraction explanation"
+            on_release:
+                root.open_popup()
+
+
+        Button1:
+            text: "Open fraction graphic"
+            on_release:
+                root.open_popup2()
+
+
+<ComparisonWindow>:
+    name: "comparison"
+    fraction1: fraction1
+    fraction2: fraction2
+
+    GridLayout:
+        rows: 6
+        cols: 1
+        padding: 100
+        spacing: 30
+
+        Button1:
+            font_size: 20
+            size_hint: None, None
+            size: 80, 50
+            pos_hint: {'x': 0, 'top': 1}
+            text: "<- Back"
+            on_press:
+                root.manager.transition.direction = 'right'
+                app.root.current = 'main'
+
+        Label:
+            text: "COMPARISON"
+
+        Label:
+            text: "Here you can compare two given fractions.\nExample: 1/4 versus 1/8"
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Fraction #1: "
+                color: 0,0,0,1
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+
+            TextInput:
+                id: fraction1
+                multiline: False
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Fraction #2: "
+                color: 0,0,0,1
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 0, 1
+
+            TextInput:
+                id: fraction2
+                multiline: False
+
+        Button1:
+            text: "Compare"
+            
+            on_press:
+                root.open_popup()
